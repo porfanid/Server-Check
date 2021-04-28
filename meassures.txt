@@ -1,0 +1,5 @@
+time:1619604715
+scylla.cs.uoi.gr:true
+ecourse.uoi.gr:true
+eudoxus.gr:true
+classweb.uoi.gr:true
