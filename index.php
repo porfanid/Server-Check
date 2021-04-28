@@ -131,24 +131,6 @@ function isHTTP($host,$hosts)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function read_file($file_name,$file_delimiter)
 {
   $fn = file($file_name);
@@ -160,6 +142,12 @@ function read_file($file_name,$file_delimiter)
   return $data;
 }
 
+
+
+
+/**
+ * Change these values to change the work progress of the program.
+ */
 
 $file_name="meassures.txt";
 $file_delimiter=":";
