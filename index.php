@@ -1,4 +1,20 @@
 <?php
+/**
+ * 
+ * this is what you have to change if you want to alter the hosts
+ * 
+ */
+function get_hosts(){
+
+	return array(array("scylla.cs.uoi.gr",22),array("ecourse.uoi.gr",80),array("eudoxus.gr",80),array("classweb.uoi.gr",443));
+
+  /*
+  $delimeter=GET("delimeter",";");
+  $hosts="scylla.cs.uoi.gr".$delimeter."ecourse.uoi.gr";
+  $temp_host_array=explode($delimeter,$hosts);
+  return $temp_host_array;
+  */
+}
 
 
 function ping_address($ip,$port="") {
@@ -33,19 +49,6 @@ function GET($var,$default_value="")
     return $default_value;
   }
 }
-
-function get_hosts(){
-
-	return array(array("scylla.cs.uoi.gr",22),array("ecourse.uoi.gr",80),array("eudoxus.gr",80),array("classweb.uoi.gr",443));
-
-  /*
-  $delimeter=GET("delimeter",";");
-  $hosts="scylla.cs.uoi.gr".$delimeter."ecourse.uoi.gr";
-  $temp_host_array=explode($delimeter,$hosts);
-  return $temp_host_array;
-  */
-}
-
 
 function get_status($hosts){
 
