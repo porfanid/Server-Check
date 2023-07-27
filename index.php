@@ -5,65 +5,48 @@
  * 
  */
 function get_hosts(){
-
 	return array(array("scylla.cs.uoi.gr",22),array("ecourse.uoi.gr",80),array("eudoxus.gr",80),array("classweb.uoi.gr",443));
-
-  /*
-  $delimeter=GET("delimeter",";");
-  $hosts="scylla.cs.uoi.gr".$delimeter."ecourse.uoi.gr";
-  $temp_host_array=explode($delimeter,$hosts);
-  return $temp_host_array;
-  */
 }
 
-
+/**
+ * @param $ip
+ * @param $port
+ * @return bool
+ * Function to ping each host.
+ * It returns a simple boolean value based on whether that host is online
+ */
 function ping_address($ip,$port="") {
-  /*
-  $session = new SNMP(SNMP::VERSION_2c, $ip);
-  return ($session->getError())==0;
-  */
 
   if(empty($port))
   {
-    $pingresult = exec("/bin/ping -c 2 $ip", $outcome, $status);
+    exec("/bin/ping -c 2 $ip", $outcome, $status);
     
     return 0 == $status;
   }
 
   $fp = fsockopen("udp://".$ip, $port, $errno, $errstr);
+  if($errstr){
+      return false;
+  }
   if (!$fp) {
     //return false;
-    $pingresult = exec("/bin/ping -c 2 $ip", $outcome, $status);
+    exec("/bin/ping -c 2 $ip", $outcome, $status);
     return 0 == $status;
   }else{
     return true;
   }
 }
 
-function GET($var,$default_value="")
-{
-  if(isset($_GET[$var])&&$_GET[$var]!="")
-  {
-    return htmlspecialchars($_GET[$var]);
-  }else{
-    return $default_value;
-  }
-}
+
 
 function get_status($hosts){
-
-  //var_dump($hosts);
 
   $servers=array();
   $i=0;
   foreach ($hosts as $key=>$server_port) {
-    //var_dump($server_port);
 
     $server=$server_port[0];
-    //echo $key.$server;
-    //die();
     $port=$server_port[1];
-    //echo $port;
     $result=ping_address($server,$port);
     $servers[$server]=$result;
   }
@@ -73,43 +56,48 @@ function get_status($hosts){
 
 
 function get_new_values($servers){
-  $values=array("time"=>time());
+    $values=array("time"=>time());
 
-  foreach($servers as $server=>$status)
-  {
-    if($status)
+    foreach($servers as $server=>$status)
     {
-      $values[$server]="true";
-    }else{
-      $values[$server]="false";
+        if($status)
+        {
+            $values[$server]="true";
+        }else{
+            $values[$server]="false";
+        }
     }
-  }
-  return $values;
+    return $values;
 }
 
 
 function write_to_file($values,$file_name,$EOL=PHP_EOL,$delimiter=NULL)
 {
-  if(is_null($delimiter))
-  {
-    global $file_delimiter;
-    $delimiter=$file_delimiter;
-  }
-  $result="";
-  foreach($values as $key=>$value)
-  {
-    $result=$result.$key.$delimiter.$value.$EOL;
-  }
-  file_put_contents($file_name, $result);
+    if(is_null($delimiter))
+    {
+        global $file_delimiter;
+        $delimiter=$file_delimiter;
+    }
+    $result="";
+    foreach($values as $key=>$value)
+    {
+        $result=$result.$key.$delimiter.$value.$EOL;
+    }
+    file_put_contents($file_name, $result);
 }
 
 function renew_values($file_name)
 {
-  $values=get_new_values(get_status(get_hosts()));
-  write_to_file($values,$file_name,"\n");
+    $values=get_new_values(get_status(get_hosts()));
+    write_to_file($values,$file_name,"\n");
 }
 
-
+/**
+ * @param $host
+ * @param $hosts
+ * @return int|void
+ * Function to get wether the host is http/https or something else
+ */
 function isHTTP($host,$hosts)
 {
 	foreach($hosts as $temp_host)
@@ -130,16 +118,21 @@ function isHTTP($host,$hosts)
 	}
 }
 
-
+/**
+ * @param $file_name
+ * @param $file_delimiter
+ * @return array
+ * Function to read the hosts that are temporarily stored in the file
+ */
 function read_file($file_name,$file_delimiter)
 {
-  $fn = file($file_name);
-  $data=array();
-  foreach ($fn as $value) {
-    $temp_data=explode($file_delimiter,$value);
-    $data[$temp_data[0]]=$temp_data[1];
-  }
-  return $data;
+    $fn = file($file_name);
+    $data=array();
+    foreach ($fn as $value) {
+        $temp_data=explode($file_delimiter,$value);
+        $data[$temp_data[0]]=$temp_data[1];
+    }
+    return $data;
 }
 
 
