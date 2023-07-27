@@ -254,6 +254,12 @@ foreach ($data as $key => $value) {
     <h1 class="title"><?php echo $text ?></h1>
     <div>
         <p>Τα παραπάνω στοιχεία προκύπτουν με προσπάθεια σύνδεσης σε συγκεκριμένη θύρα, και αν αυτό αποτύχει, συνεχίζει με εκτέλεση της εντολής ping. Αυτό υποδηλώνει πως ο server απαντάει σε ορισμένα αιτήματα. Υπάρχει όμως η πιθανότητα και πάλι να μην μπορείτε να συνδεθείτε. Σε περίπτωση που συμβεί αυτό, μπορείτε πάντοτε να <a href="mailto:support@cs.uoi.gr">επικοινωνήσετε</a> με την ομάδα υποστήριξης.</p>
+        
+        <p>
+            Το παρόν project μπορεί να βρεθεί στο GitHub:
+            <div class="repo-card" data-repo="porfanid/Server-Check"></div>
+        </p>
+        
          <p>&mdash; <a href="http://cse.uoi.gr/~cse74134"> Παύλος Ορφανίδης</a></p>
     </div>
 </article>
@@ -269,5 +275,7 @@ foreach ($data as $key => $value) {
   }
   ?>.
 </footer>
+
+<script src="https://tarptaeya.github.io/repo-card/repo-card.js"></script>
 </body>
 </html>
