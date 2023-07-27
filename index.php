@@ -200,6 +200,24 @@ foreach ($data as $key => $value) {
   }
   ?>
 </title>
+
+
+<meta name="description" content="Check the status of various servers. This page displays the online status of servers, including scylla.cs.uoi.gr, ecourse.uoi.gr, eudoxus.gr, and classweb.uoi.gr.">
+  <meta name="keywords" content="server status, online, scylla, ecourse, eudoxus, classweb">
+  <meta name="author" content="Παύλος Ορφανίδης">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@paul_porfanid">
+  
+  <meta name="twitter:title" content="Server Status - <?php if($are_up){ echo "Online";}else{echo "Offline";} ?>">
+  <meta name="twitter:description" content="Check the status of various servers. This page displays the online status of servers, including scylla.cs.uoi.gr, ecourse.uoi.gr, eudoxus.gr, and classweb.uoi.gr.">
+  
+  <meta property="og:title" content="Server Status - <?php if($are_up){ echo "Online";}else{echo "Offline";} ?>">
+  <meta property="og:description" content="Check the status of various servers. This page displays the online status of servers, including scylla.cs.uoi.gr, ecourse.uoi.gr, eudoxus.gr, and classweb.uoi.gr.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cse.uoi.gr/~cse74134/servers">
+  <!-- Add Twitter image here using: <meta name="twitter:image" content="your-image-url.jpg"> -->
+
+
 <style>
   body { text-align: center; padding: 7%; font: 20px Helvetica, sans-serif; color: #333;}
   .title{ font-size: 30px; }
