@@ -1,0 +1,22 @@
+name: SFTP Upload
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install lftp
+      run: sudo apt-get update && sudo apt-get install lftp -y
+
+    - name: Upload files to SFTP
+      run: |
+        # Connect to the SFTP server and upload files using lftp
+        lftp -c "open -u ${{ secrets.SFTP_USERNAME }} -p ${{ secrets.SFTP_PASSWORD }} sftp://${{ secrets.SFTP_HOST }}; mirror -R ./ ./public_html/servers/"
