@@ -260,7 +260,7 @@ foreach ($data as $key => $value) {
             <div class="repo-card" data-repo="porfanid/Server-Check"></div>
         </p>
         
-         <p>&mdash; <a href="http://cse.uoi.gr/~cse74134"> Παύλος Ορφανίδης</a></p>
+         <p>&mdash; <a href="https://github.com/porfanid"> Παύλος Ορφανίδης</a></p>
     </div>
 </article>
 <footer>
