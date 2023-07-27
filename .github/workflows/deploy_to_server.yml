@@ -6,17 +6,19 @@ on:
       - main  # Change this to your default branch name
 
 jobs:
-  deploy:
+    deploy_job:
     runs-on: ubuntu-latest
-
+    name: deploy
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Install lftp
-      run: sudo apt-get update && sudo apt-get install lftp -y
-
-    - name: Upload files to SFTP
-      run: |
-        # Connect to the SFTP server and upload files using lftp
-        lftp -c "open -u ${{ secrets.SFTP_USERNAME }} -p ${{ secrets.SFTP_PASSWORD }} sftp://${{ secrets.SFTP_HOST }}; mirror -R ./ ./public_html/servers/"
+        - name: Checkout
+        uses: actions/checkout@v2
+        - name: Deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+            username: ${{ secrets.SFTP_USERNAME }}
+            server: ${{ secrets.SFTP_SERVER }}
+            port: 22
+            local_path: './*'
+            remote_path: '/usr/home/students/stud17/cse74134/public_html/servers'
+            sftp_only: true
+            password: ${{ secrets.SFTP_PASSWORD }}
