@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Deploy file
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
@@ -21,5 +22,5 @@ jobs:
           local_path: './*'
           remote_path: '/usr/home/students/stud17/cse74134/public_html/servers'
           sftp_only: true
-          password: ${{ secrets.SFTP_PASSWORD }}
+          ssh_private_key: ${{ secrets.SSH_KEY }}
 
