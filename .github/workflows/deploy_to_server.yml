@@ -20,7 +20,7 @@ jobs:
           server: ${{ secrets.SFTP_SERVER }}
           port: 22
           local_path: './*'
-          remote_path: '/usr/home/students/stud17/cse74134/public_html/servers'
+          remote_path: '/usr/home/students/stud17/${{ secrets.SFTP_USERNAME }}/public_html/servers'
           sftp_only: true
           ssh_private_key: ${{ secrets.SSH_KEY }}
 
