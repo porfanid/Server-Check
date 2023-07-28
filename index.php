@@ -233,8 +233,6 @@ foreach ($data as $key => $value) {
   <?php
     $text="";
 
-//var_dump($new_data_values);
-
     foreach ($servers as $host => $condition) {
       $text=$text."Ο server: ";
 
@@ -287,6 +285,16 @@ foreach ($data as $key => $value) {
   }
   ?>.
 </footer>
+
+<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+<script>
+  kofiWidgetOverlay.draw('porfanid', {
+    'type': 'floating-chat',
+    'floating-chat.donateButton.text': 'Support me',
+    'floating-chat.donateButton.background-color': '#00b9fe',
+    'floating-chat.donateButton.text-color': '#fff'
+  });
+</script>
 
 <script src="https://tarptaeya.github.io/repo-card/repo-card.js"></script>
 </body>
