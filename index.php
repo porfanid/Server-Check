@@ -179,7 +179,8 @@ foreach ($data as $key => $value) {
 <!doctype html>
 <html>
 <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <title>
   <?php
 
@@ -217,9 +218,10 @@ foreach ($data as $key => $value) {
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cse.uoi.gr/~cse74134/servers">
   <!-- Add Twitter image here using: <meta name="twitter:image" content="your-image-url.jpg"> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
 
-<style>
+    <style>
   body { text-align: center; padding: 7%; font: 20px Helvetica, sans-serif; color: #333;}
   .title{ font-size: 30px; }
   article { display: block; text-align: left; width: 650px; margin: 0 auto; }
@@ -228,40 +230,55 @@ foreach ($data as $key => $value) {
 </style>
 </head>
 <body>
-<article>
-
+<article class="container mt-5">
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Server</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
   <?php
     $text="";
 
     foreach ($servers as $host => $condition) {
-      $text=$text."Ο server: ";
+      $text=$text."<tr><td>";
 
       	if($new_data_values[$host]==0)
 	{
-		$text=$text."<a href='https://$host' target='_blank'>$host</a> είναι: ";
+		$text=$text."<strong><a href='https://$host' target='_blank'>$host</a></strong>";
 	}
 	else
 	{
 		if($new_data_values[$host]==1)
 		{
-			$text=$text."<a href='http://$host' target='_blank'>$host</a> είναι:";
+			$text=$text."<strong><a href='http://$host' target='_blank'>$host</a></strong>";
 		}
 		else{
-			$text=$text."$host είναι:";
+			$text=$text."<strong>$host</strong>";
 		}
 	}
+        $text=$text."</td><td>";
+
 	//://$host' target='_blank'>$host</a> είναι: ";
       if($condition)
       {
-        $text=$text."online";
+        $text=$text."<span class='badge bg-success'>online</span>";
       }else{
-        $text=$text."offline";
+        $text=$text."<span class='badge bg-error'>offline</span>";
       }
-      $text=$text."\n<br>";
+
+
+      $text=$text."</td></tr>\n";
     }
   ?>
 
-    <h1 class="title"><?php echo $text ?></h1>
+  <?php echo $text ?>
+        </tbody>
+    </table>
+
+
     <div>
         <p>Τα παραπάνω στοιχεία προκύπτουν με προσπάθεια σύνδεσης σε συγκεκριμένη θύρα, και αν αυτό αποτύχει, συνεχίζει με εκτέλεση της εντολής ping. Αυτό υποδηλώνει πως ο server απαντάει σε ορισμένα αιτήματα. Υπάρχει όμως η πιθανότητα και πάλι να μην μπορείτε να συνδεθείτε. Σε περίπτωση που συμβεί αυτό, μπορείτε πάντοτε να <a href="https://support.cs.uoi.gr/doku.php?id=cse:%CE%B3%CE%B5%CE%BD%CE%B9%CE%BA%CE%AC:%CE%B5%CF%80%CE%B9%CE%BA%CE%BF%CE%B9%CE%BD%CF%89%CE%BD%CE%AF%CE%B1">επικοινωνήσετε</a> με την ομάδα υποστήριξης.</p>
         
@@ -273,7 +290,7 @@ foreach ($data as $key => $value) {
          <p>&mdash; <a href="https://github.com/porfanid"> Παύλος Ορφανίδης</a></p>
     </div>
 </article>
-<footer>
+<footer class="container mt-5">
   Τελευταία ενημέρωση στις: <?php echo $new_data["last_update"]; ?><br>
   Επόμενη ενημέρωση στίς: <?php echo $new_data["next_update"]; ?><br>
   Η ενημέρωση γίνεται κάθε <?php $minutes=$awaiting_time/60; echo $minutes; ?> λεπτ<?php
@@ -295,7 +312,7 @@ foreach ($data as $key => $value) {
     'floating-chat.donateButton.text-color': '#fff'
   });
 </script>
-
-<script src="https://tarptaeya.github.io/repo-card/repo-card.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="https://tarptaeya.github.io/repo-card/repo-cardbadge bg-success.js"></script>
 </body>
 </html>
