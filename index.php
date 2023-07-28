@@ -90,6 +90,7 @@ function renew_values($file_name)
 {
     $values=get_new_values(get_status(get_hosts()));
     write_to_file($values,$file_name,"\n");
+    return $values;
 }
 
 /**
@@ -149,19 +150,24 @@ $awaiting_time=5*60;
 
 $data=read_file($file_name,$file_delimiter);
 $renew=time()>intval($data["time"])+$awaiting_time;
+?>
+<script>
+    console.log(`<?php echo time()." : ".intval($data["time"])+$awaiting_time?>`);
+</script>
+<?php
 if($renew)
 {
   //file_get_contents('update-cronjob.php');
-  renew_values($file_name);
-  $data=read_file($file_name,$file_delimiter);
+    $data=renew_values($file_name);
 }
 $new_data_values=array();
 $new_data=array();
 foreach ($data as $key => $value) {
   if($key=="time")
   {
-    $new_data["next_update"]=date("D d-m-Y H:i:s",intval($value)+$awaiting_time);
-    $new_data["last_update"]=date("D d-m-Y H:i:s",intval($value));
+      // Adding 3*600 to make it from utc to utc+3
+    $new_data["next_update"]=date("D d-m-Y H:i:s",intval($value)+$awaiting_time + 3 * 3600);
+    $new_data["last_update"]=date("D d-m-Y H:i:s",intval($value) + 3 * 3600);
   }else{
     if(trim($value)=="true")
     {
