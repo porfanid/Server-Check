@@ -1,4 +1,4 @@
-name: SFTP 000webhost Upload
+name: SFTP Upload
 
 on:
   push:
@@ -16,11 +16,11 @@ jobs:
       - name: Deploy file
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          username: unbreakable-situati
-          server: files.000webhost.com
-          port: 21
+          username: ${{ secrets.SFTP_USERNAME }}
+          server: ${{ secrets.SFTP_SERVER }}
+          port: 22
           local_path: './*'
           remote_path: '/usr/home/students/stud17/${{ secrets.SFTP_USERNAME }}/public_html/servers'
           sftp_only: true
-          password: ${{ secrets.HOST_PASSWORD }}
+          ssh_private_key: ${{ secrets.SSH_KEY }}
 
