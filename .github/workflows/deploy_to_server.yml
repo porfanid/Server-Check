@@ -20,7 +20,7 @@ jobs:
           server: files.000webhost.com
           port: 21
           local_path: './*'
-          remote_path: '/usr/home/students/stud17/${{ secrets.SFTP_USERNAME }}/public_html/servers'
+          remote_path: 'public_html/servers'
           sftp_only: true
           password: ${{ secrets.HOST_PASSWORD }}
 
